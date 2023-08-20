@@ -9,6 +9,7 @@ import rain from '../../assets/rain.png'
 import snow from '../../assets/snow.png'
 import cloud from '../../assets/cloud.png'
 import mist from '../../assets/mist.png'
+import haze from '../../assets/mist.png'
 import NotFound from '../NotFound/NotFound';
 
 type Props = {}
@@ -63,6 +64,8 @@ const Home: React.FC<Props> = (props: Props) => {
                 return cloud;
             case 'Mist':
                 return mist;
+            case 'Haze':
+                return haze;
             default:
                 return '';
         }
