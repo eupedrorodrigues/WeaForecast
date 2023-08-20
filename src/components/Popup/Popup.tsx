@@ -10,7 +10,6 @@ const Popup: React.FC = (props: Props) => {
   return (
     <div className={styles.WrapperPopup}>
       <Home />
-      <NotFound />
     </div>
   )
 }

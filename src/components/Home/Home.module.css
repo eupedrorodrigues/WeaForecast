@@ -17,7 +17,7 @@
 .searchBox input{
     color: #06283D;
     width: 80%;
-    font-size: 20px;
+    font-size: 17px;
     font-weight: 500;
     text-transform: uppercase;
     padding-left: 32px;
@@ -45,7 +45,7 @@
 }
 
 .searchBox button:hover{
-    color: #fff;
+    color: #dff6ff;
     background: #06283D;
 }
 
