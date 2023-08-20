@@ -36,37 +36,37 @@ const Home: React.FC<Props> = (props: Props) => {
     
     const APIKEY= 'a93293a1cbbc429ca20a497caf5b7ffe'
 
-  const handleSearch = () => {
-    if (city) {
-        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${APIKEY}`)
-        .then(response => response.json())
-        .then(json => {
-            if(json.cod === '404'){
-                setError(true);
-            }else{
-                setWeatherData(json);
-                setError(false);
-            }
-        });
-    };
-  }
-
-  const getImageSource = (main:any) => {
-    switch (main) {
-        case 'Clear':
-            return clear;
-        case 'Rain':
-            return rain;
-        case 'Snow':
-            return snow;
-        case 'Clouds':
-            return cloud;
-        case 'Mist':
-            return mist;
-        default:
-            return '';
+    const handleSearch = () => {
+        if (city) {
+            fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${APIKEY}`)
+            .then(response => response.json())
+            .then(json => {
+                if(json.cod === '404'){
+                    setError(true);
+                }else{
+                    setWeatherData(json);
+                    setError(false);
+                }
+            });
+        };
     }
-};
+
+    const getImageSource = (main:any) => {
+        switch (main) {
+            case 'Clear':
+                return clear;
+            case 'Rain':
+                return rain;
+            case 'Snow':
+                return snow;
+            case 'Clouds':
+                return cloud;
+            case 'Mist':
+                return mist;
+            default:
+                return '';
+        }
+    };
 
     const handleKeyPress = (event: React.KeyboardEvent) => {
         if (event.key === 'Enter') {
