@@ -10,9 +10,7 @@ import snow from '../../assets/snow.png'
 import cloud from '../../assets/cloud.png'
 import mist from '../../assets/mist.png'
 import haze from '../../assets/mist.png'
-import NotFound from '../NotFound/NotFound';
-
-type Props = {}
+import Error404 from '../../assets/404.png';
 
 type WeatherData = {
     cod: string;
@@ -29,7 +27,7 @@ type WeatherData = {
     };
 }
 
-const Home: React.FC<Props> = (props: Props) => {
+const Home = () => {
 
     const [city,setCity] = useState<string>('')
     const [weatherData, setWeatherData] = useState<WeatherData | null>(null)
@@ -41,14 +39,14 @@ const Home: React.FC<Props> = (props: Props) => {
         if (city) {
             fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${APIKEY}`)
             .then(response => response.json())
-            .then(json => {
+            .then((json) => {
                 if(json.cod === '404'){
                     setError(true);
                 }else{
                     setWeatherData(json);
                     setError(false);
                 }
-            });
+              });
         };
     }
 
@@ -82,48 +80,53 @@ const Home: React.FC<Props> = (props: Props) => {
     <div>
         <div>
             <div className={styles.searchBox}>
-            <FaLocationDot className={styles.Icon}/>
-            <input 
-            type="text" 
-            placeholder='Enter your location' 
-            value={city}
-            onChange={e => setCity(e.target.value)} 
-            onKeyDown={handleKeyPress}
-            />
-            <button onClick={handleSearch}>
-                <BiSearchAlt className={styles.Icon}/>
-            </button>
+                <FaLocationDot className={styles.Icon}/>
+                <input 
+                    type="text" 
+                    placeholder='Enter your location' 
+                    value={city}
+                    onChange={e => setCity(e.target.value)} 
+                    onKeyDown={handleKeyPress}
+                />
+                <button onClick={handleSearch}>
+                    <BiSearchAlt className={styles.Icon}/>
+                </button>
             </div>
         </div>
 
         {/* Conteúdo */}
         
-            {error ? (<NotFound/>)  : (weatherData && (
+        {error ? (<img src={Error404} alt="Error" />
+                // <div className={styles.notFound}>
+                //     <img src={Error404} alt="Error" />
+                //     <p>Localização inválida</p>
+                // </div>
+            )  : (weatherData && (
                 <div className={styles.weatherBox}>
                     <img src={getImageSource(weatherData.weather[0].main)} alt="WeatherForecastter" />
                     <p className={styles.temperature}>{parseInt(weatherData.main.temp.toFixed(0))}°C</p>
-                        <p className={styles.description}>{weatherData.weather[0].description}</p>
+                    <p className={styles.description}>{weatherData.weather[0].description}</p>
                 </div>
-            ))}
+        ))}    
                 
-            {weatherData && (
+        {weatherData && (
                 <div className={styles.weatherDetails}>
-                <div className={styles.humidity}>
-                    <BiWater className={styles.IconContent}/>
-                    <div className={styles.text}>
-                        <span>{weatherData.main.humidity}%</span>
-                        <p>Humidity</p>
+                    <div className={styles.humidity}>
+                        <BiWater className={styles.IconContent}/>
+                        <div className={styles.text}>
+                            <span>{weatherData.main.humidity}%</span>
+                            <p>Humidity</p>
+                        </div>
                     </div>
-                </div>
-                <div className={styles.wind}>
-                    <BiWind className={styles.IconContent}/>
-                    <div className={styles.text}>
-                        <span>{parseInt(weatherData.wind.speed.toFixed(0))}Km/h</span>
-                        <p>Wind Speed</p>
+                    <div className={styles.wind}>
+                        <BiWind className={styles.IconContent}/>
+                        <div className={styles.text}>
+                            <span>{parseInt(weatherData.wind.speed.toFixed(0))}Km/h</span>
+                            <p>Wind Speed</p>
+                        </div>
                     </div>
-                </div>
             </div>
-            )}
+            )}    
             
         
     </div>

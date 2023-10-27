@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './Popup.module.css';
-import NotFound from '../NotFound/NotFound';
 import Home from '../Home/Home';
 
 
