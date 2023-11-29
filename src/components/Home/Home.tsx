@@ -33,7 +33,7 @@ const Home = () => {
     const [weatherData, setWeatherData] = useState<WeatherData | null>(null)
     const [error, setError] = useState<boolean>(false)
     
-    const APIKEY= 'a93293a1cbbc429ca20a497caf5b7ffe'
+    const APIKEY= 'YOUR API KEY'
 
     const handleSearch = () => {
         if (city) {
